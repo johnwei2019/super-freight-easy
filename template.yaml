@@ -3,37 +3,43 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   super-freight-easy
 
-  Sample SAM Template for super-freight-easy
-  
+  One lambda function to convert the order file to a CSV file that can be imported to the Super Freight system.
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 60
+
+Parameters:
+  S3BucketName:
+    Type: String
+    Description: Name of the S3 Bucket that stores the order file
+
+  SnsTopicName:
+    Type: String
+    Description: Name of the SNS topic that publishes the order file event
 
 Resources:
-  HelloWorldFunction:
+  GenerateSuperFreightCsvFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: hello-world/
+      CodeUri: app/
       Handler: app.lambdaHandler
       Runtime: nodejs12.x
+      Policies:
+        - AWSLambdaExecute
+        - S3CrudPolicy:
+            BucketName: !Ref S3BucketName
       Events:
-        HelloWorld:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+        OrderFileUploaded:
+          Type: SNS # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /hello
-            Method: get
+            Topic: !Sub "arn:aws:sns:${AWS::Region}:${AWS::AccountId}:${SnsTopicName}"
 
 Outputs:
-  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
-  # Find out more about other implicit resources you can reference within SAM
-  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  HelloWorldApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+  GenerateSuperFreightCsvFunction:
+    Description: "Generate Super Freight Csv Lambda Function ARN"
+    Value: !GetAtt GenerateSuperFreightCsvFunction.Arn
+  GenerateSuperFreightCsvFunctionIamRole:
+    Description: "Implicit IAM Role created for Generate Super Freight Csv Function"
+    Value: !GetAtt GenerateSuperFreightCsvFunctionRole.Arn

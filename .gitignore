@@ -1,4 +1,6 @@
 eBay-OrdersReport-*
+.DS_Store
+.aws-sam/
 
 # Created by https://www.gitignore.io/api/osx,node,linux,windows
 
