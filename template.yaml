@@ -11,6 +11,10 @@ Globals:
     Timeout: 60
 
 Parameters:
+  StoreConfigBucketName:
+    Type: String
+    Description: Name of the S3 Bucket for the store configs
+
   S3BucketName:
     Type: String
     Description: Name of the S3 Bucket that stores the order file
@@ -30,6 +34,11 @@ Resources:
         - AWSLambdaExecute
         - S3CrudPolicy:
             BucketName: !Ref S3BucketName
+        - S3ReadPolicy:
+            BucketName: !Ref StoreConfigBucketName
+      Environment:
+        Variables:
+          STORE_CONFIGS_BUCKET: !Ref StoreConfigBucketName
       Events:
         OrderFileUploaded:
           Type: SNS # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

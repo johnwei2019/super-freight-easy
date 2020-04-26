@@ -1,0 +1,10 @@
+---
+storeId: "dummy_store_id"
+storeName: "Dummy Store"
+address1: "Unit 1"
+address2: "Supernice Road"
+suburb: "Blackswan"
+postcode: "3100"
+state: "VIC"
+phone: "0436888999"
+email: "someone@gmail.com"

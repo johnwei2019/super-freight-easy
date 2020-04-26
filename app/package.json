@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.663.0",
+    "js-yaml": "^3.13.1",
     "loglevel": "^1.6.8"
   },
   "scripts": {
