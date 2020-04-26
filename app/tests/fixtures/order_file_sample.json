@@ -1,3 +1,54 @@
 {
-  "foo": "bar"
+  "store_id": "all4betterbuy",
+  "orders": [
+    {
+      "sales_order_number": 36987,
+      "sale_date": "2020-04-22",
+      "buyer_id": "buyer.1",
+      "buyer_note": null,
+      "post_address": {
+        "name": "Jack A",
+        "phone": "+61 405 222 333",
+        "email": "buyer.1@somewhere.com",
+        "address_1": "",
+        "address_2": "2A Dummy Road",
+        "city": "Highland",
+        "state": "New South Wales",
+        "post_code": "2000"
+      },
+      "postage_service": "Australia Post Standard",
+      "items": [{
+        "title": "Weaving 3D Knee Brace Breathable Sleeve Support Running Jogging Joint Pain ",
+        "variation": "[Black+Black,L]",
+        "sold_via_promoted_listings": "No",
+        "quantity": 2,
+        "sale_price": "0.949e1"
+      }]
+    },
+    {
+      "sales_order_number": 36986,
+      "sale_date": "2020-04-22",
+      "buyer_id": "buyer.2",
+      "buyer_note": null,
+      "post_address": {
+        "name": "Jon B",
+        "phone": "+61 400 555 666",
+        "email": "buyer.2@somewhere.com",
+        "address_1": "10",
+        "address_2": "Happy Place",
+        "city": "YANCHEP",
+        "state": "WA",
+        "post_code": "6035"
+      },
+      "postage_service": "Australia Post Express",
+      "items": [{
+        "title": "For Oppo  AX7 AX5S AX5 A3s Wallet Flip Card Holder Case Cover",
+        "variation": "[Brown,For Oppo AX7/A7]",
+        "sold_via_promoted_listings": "No",
+        "quantity": 1,
+        "sale_price": "0.756e1"
+      }]
+    }
+  ],
+  "errors": []
 }

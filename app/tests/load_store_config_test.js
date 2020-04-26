@@ -2,7 +2,7 @@
 
 const chai = require('chai');
 const expect = chai.expect;
-const sinon = require('sinon')
+const sinon = require('sinon');
 const loadStoreConfig = require('../load_store_config');
 const sample_data = require('fs').readFileSync('./tests/fixtures/store_config_sample.yaml').toString();
 const bucket = 'dummy-bucket'
@@ -23,27 +23,27 @@ const expectedConfig = {
   state: "VIC",
   phone: "0436888999",
   email: "someone@gmail.com"
-}
+};
 
 describe('loadStoreConfig', function() {
   beforeEach(function() {
-    process.env.STORE_CONFIGS_BUCKET = bucket
+    process.env.STORE_CONFIGS_BUCKET = bucket;
   })
 
   afterEach(function() {
-    delete process.env.STORE_CONFIGS_BUCKET
+    delete process.env.STORE_CONFIGS_BUCKET;
   })
 
   it('load store config from s3', async function() {
-    const spy = sinon.spy(s3Client, 'get')
-    await loadStoreConfig(userId, storeId, s3Client)
+    const spy = sinon.spy(s3Client, 'get');
+    await loadStoreConfig(userId, storeId, s3Client);
     expect(spy.calledOnceWith(
       bucket, 'dummy-user-id/dummy-store-id/super_freight_config.yml'
-    )).to.be.true
+    )).to.be.true;
   });
 
   it('returns the store config data object', async function() {
-    const config = await loadStoreConfig(userId, storeId, s3Client)
-    expect(config).to.deep.equal(expectedConfig)
+    const config = await loadStoreConfig(userId, storeId, s3Client);
+    expect(config).to.deep.equal(expectedConfig);
   });
 });
