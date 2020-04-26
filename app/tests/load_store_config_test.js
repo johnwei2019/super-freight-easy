@@ -4,13 +4,13 @@ const chai = require('chai');
 const expect = chai.expect;
 const sinon = require('sinon');
 const loadStoreConfig = require('../load_store_config');
-const sample_data = require('fs').readFileSync('./tests/fixtures/store_config_sample.yaml').toString();
+const sampleData = require('fs').readFileSync('./tests/fixtures/store_config_sample.yaml').toString();
 const bucket = 'dummy-bucket'
 const userId = 'dummy-user-id';
 const storeId = 'dummy-store-id';
 const s3Client = {
   get: function() {
-    return Promise.resolve(sample_data);
+    return Promise.resolve(sampleData);
   }
 };
 const expectedConfig = {

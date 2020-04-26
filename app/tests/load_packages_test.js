@@ -4,12 +4,12 @@ const chai = require('chai');
 const expect = chai.expect;
 const sinon = require('sinon')
 const loadPackages = require('../load_packages');
-const sample_data = require('fs').readFileSync('./tests/fixtures/order_file_sample.json').toString();
+const sampleData = require('fs').readFileSync('./tests/fixtures/order_file_sample.json').toString();
 const bucket = 'dummy-bucket'
 const key = 'dummy-key';
 const s3Client = {
   get: function() {
-    return Promise.resolve(sample_data);
+    return Promise.resolve(sampleData);
   }
 };
 const expectedPackages = [
@@ -39,13 +39,13 @@ const expectedPackages = [
 
 describe('loadPackages', function() {
   it('reads order file content from s3', async function() {
-    const spy = sinon.spy(s3Client, 'get')
-    await loadPackages(bucket, key, s3Client)
-    expect(spy.calledOnceWith(bucket, key)).to.be.true
+    const spy = sinon.spy(s3Client, 'get');
+    await loadPackages(bucket, key, s3Client);
+    expect(spy.calledOnceWith(bucket, key)).to.be.true;
   });
 
   it('returns the packages loaded', async function() {
-    const packages = await loadPackages(bucket, key, s3Client)
-    expect(packages).to.have.deep.members(expectedPackages)
+    const packages = await loadPackages(bucket, key, s3Client);
+    expect(packages).to.have.deep.members(expectedPackages);
   });
 });

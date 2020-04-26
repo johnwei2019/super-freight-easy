@@ -43,9 +43,6 @@ const expectedCsv = require('fs').readFileSync('./tests/fixtures/packages_sample
 describe('createCsv', function() {
   it('create csv string from packages and store config', function() {
     const csv = createCsv(packages, storeConfig);
-    console.log(`Output: ${csv}`);
-
-    console.log(`Expect: ${expectedCsv}`);
     expect(csv).to.eql(expectedCsv);
   })
 })

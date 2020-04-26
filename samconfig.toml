@@ -8,4 +8,4 @@ s3_prefix = "super-freight-easy"
 region = "ap-southeast-2"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
-parameter_overrides = "S3BucketName=\"super-freight-order-file-bucket\" SqsQueueName=\"super-freight-order-file-event-sqs\" SnsTopicName=\"super-freight-order-file-event-topic\""
+parameter_overrides = "S3BucketName=\"super-freight-order-file-bucket\" SqsQueueName=\"super-freight-order-file-event-sqs\" SnsTopicName=\"super-freight-order-file-event-topic\" StoreConfigBucketName=\"store-config-bucket\""
