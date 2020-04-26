@@ -1,0 +1,3 @@
+Reference number,ShipTo_companyName,ShipTo_name,ShipTo_address1,ShipTo_address2,ShipTo_suburb,ShipTo_postcode,ShipTo_State,ShipTo_phone,ShipTo_email,ShipFrom_companyName,ShipFrom_name,ShipFrom_address1,ShipFrom_address2,ShipFrom_suburb,ShipFrom_postcode,ShipFrom_state,ShipFrom_phone,ShipFrom_email,Parcel_qty,Parcel_weight,Parcel_length,Parcel_width,Parcel_height,settings.delivery_instructions
+36987,,Jack A,2A Dummy Road,,Highland,2000,New South Wales,+61 405 222 333,buyer.1@somewhere.com,,Dummy Store,Unit 1,Supernice Road,Blackswan,3100,VIC,0436888999,someone@gmail.com,,,,,,
+36986,,Jon B,10,Happy Place,YANCHEP,6035,WA,+61 400 555 666,buyer.2@somewhere.com,,Dummy Store,Unit 1,Supernice Road,Blackswan,3100,VIC,0436888999,someone@gmail.com,,,,,,
