@@ -24,9 +24,7 @@ const s3Client = {
       return Promise.reject(new Error('Unexpected arguments'));
     }
   },
-  put(bucket, key, content) {
-    return Promise.resolve({});
-  }
+  put: sinon.fake.resolves({})
 };
 const expectedCsv = fs.readFileSync('./tests/fixtures/packages_sample.csv').toString();
 
@@ -40,9 +38,8 @@ describe('generateSuperFreightCsv', function() {
   })
 
   it('generates the super freight csv file to S3', async function() {
-    const spy = sinon.spy(s3Client, 'put');
     await generateSuperFreightCsv(orderFileBucket, orderFileKey, s3Client);
-    expect(spy.calledOnceWith(
+    expect(s3Client.put.calledOnceWith(
       'dummy-order-file-bucket', 'dummy_order_file_name-super-freight.csv_sf', expectedCsv
     )).to.be.true;
   });

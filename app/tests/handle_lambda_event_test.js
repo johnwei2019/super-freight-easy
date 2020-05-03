@@ -32,8 +32,8 @@ const event = {
 
 describe('handleLambdaEvent', function() {
   it('calls generateSuperFreightCsvFunc with correct params', async function() {
-    const fake = sinon.fake();
-    await handleLambdaEvent(event, fake);
-    expect(fake.calledOnceWith(bucket, key)).to.be.true;
+    const fakeGenerateSuperFreightCsvFunc= sinon.fake();
+    await handleLambdaEvent(event, fakeGenerateSuperFreightCsvFunc);
+    expect(fakeGenerateSuperFreightCsvFunc.calledOnceWith(bucket, key)).to.be.true;
   });
 });

@@ -9,22 +9,16 @@ const bucket = 'test-bucket';
 const key = 'test-key';
 const sample_data = fs.readFileSync('./tests/fixtures/order_file_sample.json').toString();
 const fakeS3 = {
-  getObject: function() {
-    return {
-      promise: function() {
-        return Promise.resolve({
-          Body: Buffer.from(sample_data)
-        });
-      }
-    };
-  },
-  putObject: function() {
-    return {
-      promise: function() {
-        return Promise.resolve({});
-      }
-    };
-  }
+  getObject: sinon.fake.returns({
+    promise: function() {
+      return Promise.resolve({ Body: Buffer.from(sample_data) });
+    }
+  }),
+  putObject: sinon.fake.returns({
+    promise: function() {
+      return Promise.resolve({});
+    }
+  })
 };
 
 describe('s3Client', function() {
@@ -34,11 +28,9 @@ describe('s3Client', function() {
         Bucket: bucket,
         Key: key
       };
-      const spy = sinon.spy(fakeS3, 'getObject');
-
       const s3Client = new S3Client(fakeS3);
       const data = await s3Client.get(bucket, key);
-      expect(spy.calledOnceWith(getParams)).to.be.true
+      expect(fakeS3.getObject.calledOnceWith(getParams)).to.be.true
     });
 
     it('returns the retrieved file content as string', async function() {
@@ -55,11 +47,10 @@ describe('s3Client', function() {
         Key: key,
         Body: sample_data
       }
-      const spy = sinon.spy(fakeS3, 'putObject');
 
       const s3Client = new S3Client(fakeS3);
       const data = await s3Client.put(bucket, key, sample_data);
-      expect(spy.calledOnceWith(putParams)).to.be.true
+      expect(fakeS3.putObject.calledOnceWith(putParams)).to.be.true
     })
   })
 });

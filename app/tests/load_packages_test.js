@@ -8,9 +8,7 @@ const sampleData = require('fs').readFileSync('./tests/fixtures/order_file_sampl
 const bucket = 'dummy-bucket'
 const key = 'dummy-key';
 const s3Client = {
-  get: function() {
-    return Promise.resolve(sampleData);
-  }
+  get: sinon.fake.resolves(sampleData)
 };
 const expectedPackages = [
   {
@@ -39,9 +37,8 @@ const expectedPackages = [
 
 describe('loadPackages', function() {
   it('reads order file content from s3', async function() {
-    const spy = sinon.spy(s3Client, 'get');
     await loadPackages(bucket, key, s3Client);
-    expect(spy.calledOnceWith(bucket, key)).to.be.true;
+    expect(s3Client.get.calledOnceWith(bucket, key)).to.be.true;
   });
 
   it('returns the packages loaded', async function() {

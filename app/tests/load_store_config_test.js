@@ -9,9 +9,7 @@ const bucket = 'dummy-bucket'
 const userId = 'dummy-user-id';
 const storeId = 'dummy-store-id';
 const s3Client = {
-  get: function() {
-    return Promise.resolve(sampleData);
-  }
+  get: sinon.fake.resolves(sampleData)
 };
 const expectedConfig = {
   storeId: "dummy_store_id",
@@ -35,9 +33,8 @@ describe('loadStoreConfig', function() {
   })
 
   it('load store config from s3', async function() {
-    const spy = sinon.spy(s3Client, 'get');
     await loadStoreConfig(userId, storeId, s3Client);
-    expect(spy.calledOnceWith(
+    expect(s3Client.get.calledOnceWith(
       bucket, 'dummy-user-id/dummy-store-id/super_freight_config.yml'
     )).to.be.true;
   });
