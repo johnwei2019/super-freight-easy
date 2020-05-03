@@ -12,7 +12,7 @@ const createPackage = (order) => {
     postcode: address.post_code,
     state: address.state,
     phone: address.phone,
-    email: address.email
+    email: order.buyer_email
   }
 }
 
