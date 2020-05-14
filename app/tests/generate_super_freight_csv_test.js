@@ -8,10 +8,10 @@ const sinon = require('sinon');
 const fs = require('fs');
 const generateSuperFreightCsv = require('../generate_super_freight_csv');
 const configBucket = 'dummy-config-bucket';
-const configFielKey = 'dummy_user_id/dummy_store_id/super_freight_config.yml';
+const configFielKey = 'dummy_store_id/super_freight_config.yml';
 const configFileData = fs.readFileSync('./tests/fixtures/store_config_sample.yaml').toString();
 const orderFileBucket = 'dummy-order-file-bucket';
-const orderFileKey = 'dummy_user_id/dummy_store_id/dummy_order_file_name.json';
+const orderFileKey = 'dummy_store_id/dummy_order_file_name.json';
 const ordersFileData = fs.readFileSync('./tests/fixtures/order_file_sample.json').toString();
 const s3Client = {
   get(bucket, key) {
@@ -53,7 +53,7 @@ describe('generateSuperFreightCsv', function() {
 
   context('when the order file is not a json file', function() {
     it('throws error', async function() {
-      const result = generateSuperFreightCsv(orderFileBucket, 'dummy_user_id/dummy_store_id/dummy_order_file_name.csv', s3Client);
+      const result = generateSuperFreightCsv(orderFileBucket, 'dummy_store_id/dummy_order_file_name.csv', s3Client);
       expect(result).to.be.rejectedWith(Error)
     });
   });

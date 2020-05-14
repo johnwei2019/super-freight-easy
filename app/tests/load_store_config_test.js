@@ -6,7 +6,6 @@ const sinon = require('sinon');
 const loadStoreConfig = require('../load_store_config');
 const sampleData = require('fs').readFileSync('./tests/fixtures/store_config_sample.yaml').toString();
 const bucket = 'dummy-bucket'
-const userId = 'dummy-user-id';
 const storeId = 'dummy-store-id';
 const s3Client = {
   get: sinon.fake.resolves(sampleData)
@@ -33,14 +32,14 @@ describe('loadStoreConfig', function() {
   })
 
   it('load store config from s3', async function() {
-    await loadStoreConfig(userId, storeId, s3Client);
+    await loadStoreConfig(storeId, s3Client);
     expect(s3Client.get.calledOnceWith(
-      bucket, 'dummy-user-id/dummy-store-id/super_freight_config.yml'
+      bucket, 'dummy-store-id/super_freight_config.yml'
     )).to.be.true;
   });
 
   it('returns the store config data object', async function() {
-    const config = await loadStoreConfig(userId, storeId, s3Client);
+    const config = await loadStoreConfig(storeId, s3Client);
     expect(config).to.deep.equal(expectedConfig);
   });
 });

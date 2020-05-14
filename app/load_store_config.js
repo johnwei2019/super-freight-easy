@@ -15,9 +15,9 @@ const createStoreConfig = ({
   email
 });
 
-module.exports = async (userId, storeId, s3Client = new S3Client()) => {
+module.exports = async (storeId, s3Client = new S3Client()) => {
   const bucket = process.env.STORE_CONFIGS_BUCKET
-  const key = `${userId}/${storeId}/super_freight_config.yml`
+  const key = `${storeId}/super_freight_config.yml`
   const configContent = await s3Client.get(bucket, key)
   const data = yaml.safeLoad(configContent)
   return createStoreConfig(data)

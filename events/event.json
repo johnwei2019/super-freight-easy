@@ -9,7 +9,7 @@
         "MessageId": "95df01b4-ee98-5cb9-9903-4c221d41eb5e",
         "TopicArn": "arn:aws:sns:us-east-1:123456789012:ExampleTopic",
         "Subject": "example subject",
-        "Message": "{\"Records\":[{\"s3\":{\"bucket\":{\"name\":\"dummy-bucket\"},\"object\":{\"key\":\"dummy_user/dummy_store/dummy-key.json\"}}}]}",
+        "Message": "{\"Records\":[{\"s3\":{\"bucket\":{\"name\":\"dummy-bucket\"},\"object\":{\"key\":\"dummy_store/dummy-key.json\"}}}]}",
         "Timestamp": "1970-01-01T00:00:00.000Z",
         "SignatureVersion": "1",
         "Signature": "EXAMPLE",

@@ -6,17 +6,17 @@ const S3Client = require('./s3_client')
 
 module.exports = async (bucket, key, s3Client = new S3Client()) => {
   const keyParts = key.split('/');
-  if(keyParts.length !== 3) {
+  if(keyParts.length !== 2) {
     return Promise.reject(new Error(`Order file key format error [${key}]`));
   }
 
-  const [userId, storeId, orderFileName] = keyParts;
+  const [storeId, orderFileName] = keyParts;
   if(!orderFileName.endsWith('.json')) {
     return Promise.reject(new Error(`Order file must be a json file[${key}]`));
   }
 
   log.info(`Generating super freight CSV file from ${key} of bucket ${bucket}`)
-  const storeConfig = await loadStoreConfig(userId, storeId, s3Client);
+  const storeConfig = await loadStoreConfig(storeId, s3Client);
   const packages = await loadPackages(bucket, key, s3Client);
   const csv = await createCsv(packages, storeConfig);
   const destkey = `${orderFileName.slice(0, -5)}-super-freight.csv_sf`;
